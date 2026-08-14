@@ -5,3 +5,14 @@
 - Di kelas ini, kita akan bahas bagaimana cara menggunakan seluruh struktur data di Redis menggunakan Laravel
 - Dan diakhir kelas, kita akan bahas fitur-fitur apa saja di Laravel yang menggunakan Redis
 
+## Menambah Library Predis
+- Secara default, Redis menggunakan library phpredis (native menggunakan C)
+- `https://github.com/phpredis/phpredis`
+- Namun, di beberapa kasus, kadang sulit menginstall library phpredis karena membutuhkan kompilasi bahasa C
+- Oleh karena itu, di kelas ini kita akan mengunakan library Predis, yang hanya menggunakan kode PHP
+- `https://github.com/predis/predis`
+```bash
+composer require predis/predis
+```
+
+
