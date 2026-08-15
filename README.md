@@ -150,3 +150,9 @@ composer require predis/predis
 - Di kelas Redis, kita pernah belajar tentang pipeline, dimana kita bisa mengirim beberapa perintah secara langsung tanpa harus menunggu balasan satu per satu dari Redis
 - Hal ini juga bisa dilakukan menggunakan Laravel
 - Kita bisa menggunakan method pipeline(), dimana kita bisa tambahkan callback function yang berisi perintah-perintah yang akan dikerjakan dalam pipeline tersebut
+
+
+# Transaction
+- Kita tahu bahwa menggunakan Redis bisa melakukan transaction menggunakan perintah MULTI dan COMMIT
+- Untuk melakukan proses Redis Transaction di Laravel, kita tidak perlu melakukan manual MULTI dan COMMIT
+- Kita bisa menggunakan method transaction(), dan cara penggunaannya sama seperti method pipeline()
