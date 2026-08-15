@@ -146,3 +146,7 @@ composer require predis/predis
 # Hyper Log Log
 - Sekarang kita akan menggunakan struktur data Hyper Log Log 
 
+# Pipeline
+- Di kelas Redis, kita pernah belajar tentang pipeline, dimana kita bisa mengirim beberapa perintah secara langsung tanpa harus menunggu balasan satu per satu dari Redis
+- Hal ini juga bisa dilakukan menggunakan Laravel
+- Kita bisa menggunakan method pipeline(), dimana kita bisa tambahkan callback function yang berisi perintah-perintah yang akan dikerjakan dalam pipeline tersebut
