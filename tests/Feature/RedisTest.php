@@ -19,6 +19,7 @@ class RedisTest extends TestCase
         self::assertEquals("PONG", $redis2);
     }
 
+    // string
     public function test_string(): void
     {
         Redis::setex("names", 3, "rio"); // set expired (key,exp,value)
@@ -31,6 +32,7 @@ class RedisTest extends TestCase
         self::assertNull($response2); // cek response
     }
 
+    // List
     public function test_list(): void
     {
         Redis::del("names");
