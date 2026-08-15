@@ -18,7 +18,11 @@ composer require predis/predis
 # Redis Facade
 
 ## Redis Configuration
-- Secara default, semua konfigurasi untuk Redis di aplikasi Laravel terdapat di file config/database.php
+- Secara default, semua konfigurasi untuk Redis di aplikasi Laravel terdapat di file `config/database.php`
 - Kita bisa ubah konfigurasi redis di file tersebut
 - Kita bisa ubah yang defaultnya menggunakan phpredis menjadi predis pada konfigurasi file nya
 
+
+## Redis Facade
+- Untuk menggunakan Redis di Laravel, kita bisa menggunakan Redis Facade yang secara otomatis membaca konfigurasi dari konfigurasi redis di Laravel
+- `https://laravel.com/api/10.x/Illuminate/Support/Facades/Redis.html`
