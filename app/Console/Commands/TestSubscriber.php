@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Redis;
 
 class TestSubscriber extends Command
 {
@@ -11,6 +12,7 @@ class TestSubscriber extends Command
      *
      * @var string
      */
+    // php artisan app:test-subscriber 
     protected $signature = 'app:test-subscriber';
 
     /**
@@ -18,6 +20,7 @@ class TestSubscriber extends Command
      *
      * @var string
      */
+    // description
     protected $description = 'Command description';
 
     /**
@@ -25,6 +28,8 @@ class TestSubscriber extends Command
      */
     public function handle()
     {
-        echo "hello cok";
+        Redis::subscribe(['channel-1', 'channel-2'], function(string $messsage){
+            echo $messsage, PHP_EOL;
+        });
     }
 }
