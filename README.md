@@ -38,3 +38,5 @@ composer require predis/predis
 - Struktur data yang sering digunakan di Redis adalah String
 - Command yang sering kita gunakan adalah menggunakan set(), setEx(), get(), mGet(), dan lain-lain
 
+# List 
+- Sekarang kita akan menggunakan struktur data List 
