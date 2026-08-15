@@ -242,3 +242,17 @@ composer require predis/predis
         self::assertEquals("ngawi", $ad);
     }
 ```
+
+# PubSub
+- Sekarang kita akan menggunakan fitur PubSub 
+
+## Laravel Command
+- Untuk melakukan pengetesan Subscriber, kita akan membuat Laravel Command
+- Yaitu fitur untuk membuat perintah berbasis terminal
+- Perintah itu nanti akan kita gunakan untuk menjalankan Redis Subscriber
+- Kita bisa gunakan perintah :
+```bash
+php artisan make:command NamaCommand
+```
+
+
