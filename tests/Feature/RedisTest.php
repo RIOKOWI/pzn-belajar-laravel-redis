@@ -65,4 +65,16 @@ class RedisTest extends TestCase
         $response = Redis::smembers("names"); // mengembalikan semua value yang ada di dalam key
         self::assertEquals(["Rio", "Achyar", "Cungpruy"], $response);
     }
+
+    // Sorted Set
+    public function test_sorted_set(): void
+    {
+        Redis::del("names"); // hapus value di dalam key names
+        Redis::zadd("names", 100, "Rio"); // zadd(key, score, value). arti score di sini di urutkan secara asc pada yang mana atinya kalo score rio di paling tinggi berarti rio berada di ujung index/paling akhir
+        Redis::zadd("names", 85, "Achyar");
+        Redis::zadd("names", 65, "Pruy");
+
+        $response = Redis::zrange("names", 0, -1); // ambil isi semua data list dari awal sampai akhir
+        self::assertEquals(["Pruy", "Achyar", "Rio"], $response); // output sesuai skor paling rendah
+    }
 }

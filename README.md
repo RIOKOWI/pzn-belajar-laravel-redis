@@ -46,3 +46,7 @@ composer require predis/predis
 ## Set
 - Sekarang kita akan menggunakan struktur data Set 
 
+
+# Sorted Set
+- Sekarang kita akan menggunakan struktur data Sorted Set
+
