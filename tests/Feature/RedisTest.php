@@ -74,7 +74,23 @@ class RedisTest extends TestCase
         Redis::zadd("names", 85, "Achyar");
         Redis::zadd("names", 65, "Pruy");
 
-        $response = Redis::zrange("names", 0, -1); // ambil isi semua data list dari awal sampai akhir
+        $response = Redis::zrange("names", 0, -1); // ambil isi semua data list dari awal sampai akhir/ ambil data dari index pertama sampai akhir
         self::assertEquals(["Pruy", "Achyar", "Rio"], $response); // output sesuai skor paling rendah
+    }
+
+    // Hash
+    public function test_hash(): void
+    {
+        Redis::del("user:1");
+        Redis::hset("user:1", "name", "Rio"); // menambah hset(key, field, name)
+        Redis::hset("user:1", "email", "cilok@sunda.com");
+        Redis::hset("user:1", "age", 1);
+        
+        $response = Redis::hgetall("user:1"); // ambil semua isi dari hash
+        self::assertEquals([
+            "name" => "Rio",
+            "email" => "cilok@sunda.com",
+            "age" => "1", // integer jadi string
+        ], $response);
     }
 }

@@ -33,6 +33,9 @@ composer require predis/predis
 - Atau bisa langsung menggunakan nama method sesuai dengan command di Redis
 - Redis Facade akan menggunakan Magic Method untuk mengubah nama method secara otomatis menjadi nama perintah yang dikirim ke Redis
 
+## Docs
+[REDIS MAGIC METHOD DICUMENTATION](https://redis.io/docs/latest/commands)
+
 # String
 ## String
 - Struktur data yang sering digunakan di Redis adalah String
@@ -50,3 +53,5 @@ composer require predis/predis
 # Sorted Set
 - Sekarang kita akan menggunakan struktur data Sorted Set
 
+# Hash
+- Sekarang kita akan menggunakan struktur data Hash 
