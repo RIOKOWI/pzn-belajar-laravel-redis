@@ -245,7 +245,8 @@ composer require predis/predis
 
 # PubSub
 - Sekarang kita akan menggunakan fitur PubSub 
-
+* di File : [RedisTest](tests\Feature\RedisTest.php)
+* di File : [TestSubscriber Artisan Command](app\Console\Commands\TestSubscriber.php)
 ## Laravel Command
 - Untuk melakukan pengetesan Subscriber, kita akan membuat Laravel Command
 - Yaitu fitur untuk membuat perintah berbasis terminal
@@ -293,6 +294,9 @@ apa?
 woi
 apa?
 ```
+
+# Stream
+
 
 
 

@@ -187,4 +187,17 @@ class RedisTest extends TestCase
 
         self::assertTrue(true);
     }
+
+    // Stream
+    public function test_stream(): void
+    {
+        for($i = 0; $i < 10; $i++){
+            Redis::xadd("members", "*" ,[
+                "name" => "Rio $i",
+                "address" => "meikarta",
+            ]);
+        
+        }
+        self::assertTrue(true);
+    }
 }
