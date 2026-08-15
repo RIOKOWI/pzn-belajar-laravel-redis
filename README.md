@@ -40,3 +40,9 @@ composer require predis/predis
 
 # List 
 - Sekarang kita akan menggunakan struktur data List 
+
+
+# Set
+## Set
+- Sekarang kita akan menggunakan struktur data Set 
+
