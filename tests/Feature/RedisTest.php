@@ -18,4 +18,16 @@ class RedisTest extends TestCase
         $redis2 = Redis::ping();
         self::assertEquals("PONG", $redis2);
     }
+
+    public function test_string(): void
+    {
+        Redis::setex("nama", 3, "rio"); // set expired (key,exp,value)
+        $response = Redis::get("nama");
+        self::assertEquals("rio", $response);
+        
+        sleep(5);
+        
+        $response2 = Redis::get("nama");
+        self::assertEquals(null, $response2);
+    }
 }
