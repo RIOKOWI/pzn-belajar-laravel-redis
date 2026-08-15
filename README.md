@@ -252,7 +252,47 @@ composer require predis/predis
 - Perintah itu nanti akan kita gunakan untuk menjalankan Redis Subscriber
 - Kita bisa gunakan perintah :
 ```bash
-php artisan make:command NamaCommand
+php artisan make:command TestSubscriber
 ```
+- Run :
+```bash
+php artisan app:test-subscriber 
+```
+- handle subscribe
+```php
+public function handle()
+    {
+        Redis::subscribe(['channel-1', 'channel-2'], function(string $messsage){
+            echo $messsage, PHP_EOL;
+        });
+    }
+```
+- unit test publish
+```php
+// Pub Sub
+    public function test_pub_sub(): void
+    {
+        for($i = 0; $i < 10; $i++){
+            Redis::publish("channel-1", "woi");
+            Redis::publish("channel-2", "apa?");
+        }
+
+        self::assertTrue(true);
+    }
+```
+- response :
+```bash
+woi
+apa?
+woi
+apa?
+woi
+apa?
+woi
+apa?
+woi
+apa?
+```
+
 
 
