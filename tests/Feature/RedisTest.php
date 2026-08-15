@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Redis;
+use Predis\Command\Argument\Geospatial\ByRadius;
+use Predis\Command\Argument\Geospatial\FromLonLat;
 use Tests\TestCase;
 
 class RedisTest extends TestCase
@@ -94,5 +96,29 @@ class RedisTest extends TestCase
             "email" => "cilok@sunda.com",
             "age" => "1", // integer jadi string
         ], $response);
+    }
+
+    // Geo Point
+    public function test_geo_point(): void
+    {
+        // Bersihkan data merchant sebelumnya agar test selalu dimulai dari kondisi yang konsisten.
+        Redis::del("merchant");
+
+        // Menyimpan lokasi merchant menggunakan longitude, latitude, dan nama sebagai member.
+        Redis::geoadd("merchant", 106.55959818809123, -6.1615071974291435, "warmindo");
+
+        Redis::geoadd( "merchant", 106.5382170524327, -6.125298631266757, "dimsum" );
+
+        // Menghitung jarak antara Warmindo dan Dimsum dalam satuan kilometer.
+        $result = Redis::geodist( "merchant", "warmindo", "dimsum", "km" );
+
+        // Memastikan jarak kedua merchant sesuai dengan hasil yang diharapkan.
+        self::assertEquals(4.6699, $result);
+
+        // Mencari merchant dalam radius 6 km dari titik koordinat yang ditentukan.
+        $result = Redis::geosearch( "merchant", new FromLonLat( 106.55012551225578, -6.145756971084499 ), new ByRadius(6, "km") );
+
+        // Memastikan kedua merchant ditemukan dalam radius pencarian.
+        self::assertEqualsCanonicalizing(["dimsum", "warmindo"],$result);
     }
 }

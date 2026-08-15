@@ -139,3 +139,7 @@ composer require predis/predis
         ], $response);
     }
 ```
+
+# Geo Point
+- Sekarang kita akan menggunakan struktur data Geo Point
+
