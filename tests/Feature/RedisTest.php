@@ -132,4 +132,31 @@ class RedisTest extends TestCase
         $total = Redis::pfcount("pengunjung"); // mengitung data unique
         self::assertEquals(7 ,$total); // karna rio redundan jadi di hitungnya satu
     }
+
+    // Pipeline
+    public function test_pipeline(): void
+    {
+        Redis::pipeline(function ($pipeline){ // membuat object pipeline
+            $pipeline->setex("name", 5, "Rio"); // setex(key, ttl, value)
+            $pipeline->setex("handphone", 5, "097877887");
+            $pipeline->setex("address", 5, "ngawi");
+        });
+
+        $name = Redis::get("name");
+        self::assertEquals("Rio", $name); // cek value
+        $hp = Redis::get("handphone");
+        self::assertEquals("097877887", $hp);
+        $ad = Redis::get("address");
+        self::assertEquals("ngawi", $ad);
+        
+        sleep(6); 
+        
+        $name = Redis::get("name");
+        self::assertEquals(null, $name); // cek null value expired
+        $hp = Redis::get("handphone");
+        self::assertEquals(null, $hp);
+        $ad = Redis::get("address");
+        self::assertEquals(null, $ad);
+
+    }
 }
