@@ -26,3 +26,10 @@ composer require predis/predis
 ## Redis Facade
 - Untuk menggunakan Redis di Laravel, kita bisa menggunakan Redis Facade yang secara otomatis membaca konfigurasi dari konfigurasi redis di Laravel
 - `https://laravel.com/api/10.x/Illuminate/Support/Facades/Redis.html`
+
+
+## Redis Command
+- Untuk mengirim perintah ke Redis, kita bisa menggunakan method command() di Redis Facade
+- Atau bisa langsung menggunakan nama method sesuai dengan command di Redis
+- Redis Facade akan menggunakan Magic Method untuk mengubah nama method secara otomatis menjadi nama perintah yang dikirim ke Redis
+
