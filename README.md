@@ -142,17 +142,103 @@ composer require predis/predis
 
 # Geo Point
 - Sekarang kita akan menggunakan struktur data Geo Point
+* di File : [RedisTest](tests\Feature\RedisTest.php)
+```php
+    // Geo Point
+    public function test_geo_point(): void
+    {
+        // Bersihkan data merchant sebelumnya agar test selalu dimulai dari kondisi yang konsisten.
+        Redis::del("merchant");
+
+        // Menyimpan lokasi merchant menggunakan longitude, latitude, dan nama sebagai member.
+        Redis::geoadd("merchant", 106.55959818809123, -6.1615071974291435, "warmindo");
+
+        Redis::geoadd( "merchant", 106.5382170524327, -6.125298631266757, "dimsum" );
+
+        // Menghitung jarak antara Warmindo dan Dimsum dalam satuan kilometer.
+        $result = Redis::geodist( "merchant", "warmindo", "dimsum", "km" );
+
+        // Memastikan jarak kedua merchant sesuai dengan hasil yang diharapkan.
+        self::assertEquals(4.6699, $result);
+
+        // Mencari merchant dalam radius 6 km dari titik koordinat yang ditentukan.
+        $result = Redis::geosearch( "merchant", new FromLonLat( 106.55012551225578, -6.145756971084499 ), new ByRadius(6, "km") );
+
+        // Memastikan kedua merchant ditemukan dalam radius pencarian.
+        self::assertEqualsCanonicalizing(["dimsum", "warmindo"],$result);
+    }
+```
 
 # Hyper Log Log
 - Sekarang kita akan menggunakan struktur data Hyper Log Log 
+* di File : [RedisTest](tests\Feature\RedisTest.php)
+```php
+    // Hyper Log Log
+    public function test_hyper_log_log(): void
+    {
+        Redis::pfadd("pengunjung", "Rio", "Eko", "Chaniago");
+        Redis::pfadd("pengunjung", "Rio", "Rizky", "Budi");
+        Redis::pfadd("pengunjung", "Rio", "Agung", "Rafi");
+
+        $total = Redis::pfcount("pengunjung"); // mengitung data unique
+        self::assertEquals(7 ,$total); // karna rio redundan jadi di hitungnya satu
+    }
+```
 
 # Pipeline
 - Di kelas Redis, kita pernah belajar tentang pipeline, dimana kita bisa mengirim beberapa perintah secara langsung tanpa harus menunggu balasan satu per satu dari Redis
 - Hal ini juga bisa dilakukan menggunakan Laravel
 - Kita bisa menggunakan method pipeline(), dimana kita bisa tambahkan callback function yang berisi perintah-perintah yang akan dikerjakan dalam pipeline tersebut
+* di File : [RedisTest](tests\Feature\RedisTest.php)
+```php
+    // Pipeline
+    public function test_pipeline(): void
+    {
+        Redis::pipeline(function ($pipeline){ // membuat object pipeline
+            $pipeline->setex("name", 5, "Rio"); // setex(key, ttl, value)
+            $pipeline->setex("handphone", 5, "097877887");
+            $pipeline->setex("address", 5, "ngawi");
+        });
 
+        $name = Redis::get("name");
+        self::assertEquals("Rio", $name); // cek value
+        $hp = Redis::get("handphone");
+        self::assertEquals("097877887", $hp);
+        $ad = Redis::get("address");
+        self::assertEquals("ngawi", $ad);
+        
+        sleep(6); 
+        
+        $name = Redis::get("name");
+        self::assertEquals(null, $name); // cek null value expired
+        $hp = Redis::get("handphone");
+        self::assertEquals(null, $hp);
+        $ad = Redis::get("address");
+        self::assertEquals(null, $ad);
+
+    }
+```
 
 # Transaction
 - Kita tahu bahwa menggunakan Redis bisa melakukan transaction menggunakan perintah MULTI dan COMMIT
 - Untuk melakukan proses Redis Transaction di Laravel, kita tidak perlu melakukan manual MULTI dan COMMIT
 - Kita bisa menggunakan method transaction(), dan cara penggunaannya sama seperti method pipeline()
+* di File : [RedisTest](tests\Feature\RedisTest.php)
+```php
+    // Transaction
+    public function test_transaction(): void
+    {
+        Redis::transaction(function ($transaction){
+            $transaction->setex("name", 5, "Rio"); // MULTI lalu COMMIT/EXEC
+            $transaction->setex("handphone", 5, "097877887");
+            $transaction->setex("address", 5, "ngawi");
+        });
+
+        $name = Redis::get("name");
+        self::assertEquals("Rio", $name); // cek value
+        $hp = Redis::get("handphone");
+        self::assertEquals("097877887", $hp);
+        $ad = Redis::get("address");
+        self::assertEquals("ngawi", $ad);
+    }
+```
