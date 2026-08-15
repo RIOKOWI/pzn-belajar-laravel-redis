@@ -143,3 +143,6 @@ composer require predis/predis
 # Geo Point
 - Sekarang kita akan menggunakan struktur data Geo Point
 
+# Hyper Log Log
+- Sekarang kita akan menggunakan struktur data Hyper Log Log 
+

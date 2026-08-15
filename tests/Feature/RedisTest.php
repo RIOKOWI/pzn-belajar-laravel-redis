@@ -121,4 +121,15 @@ class RedisTest extends TestCase
         // Memastikan kedua merchant ditemukan dalam radius pencarian.
         self::assertEqualsCanonicalizing(["dimsum", "warmindo"],$result);
     }
+
+    // Hyper Log Log
+    public function test_hyper_log_log(): void
+    {
+        Redis::pfadd("pengunjung", "Rio", "Eko", "Chaniago");
+        Redis::pfadd("pengunjung", "Rio", "Rizky", "Budi");
+        Redis::pfadd("pengunjung", "Rio", "Agung", "Rafi");
+
+        $total = Redis::pfcount("pengunjung"); // mengitung data unique
+        self::assertEquals(7 ,$total); // karna rio redundan jadi di hitungnya satu
+    }
 }
