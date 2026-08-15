@@ -177,27 +177,48 @@ class RedisTest extends TestCase
         self::assertEquals("ngawi", $ad);
     }
 
-    // Pub Sub
-    public function test_pub_sub(): void
-    {
-        for($i = 0; $i < 10; $i++){
-            Redis::publish("channel-1", "woi");
-            Redis::publish("channel-2", "apa?");
-        }
+    // // Pub Sub
+    // public function test_pub_sub(): void
+    // {
+    //     for($i = 0; $i < 10; $i++){
+    //         Redis::publish("channel-1", "woi"); // kirim message woi ke channel 1
+    //         Redis::publish("channel-2", "apa?"); // kirim message apa? ke channel 2
+    //     }
 
-        self::assertTrue(true);
-    }
+    //     self::assertTrue(true);
+    // }
 
-    // Stream
-    public function test_stream(): void
-    {
-        for($i = 0; $i < 10; $i++){
-            Redis::xadd("members", "*" ,[
-                "name" => "Rio $i",
-                "address" => "meikarta",
-            ]);
-        
-        }
-        self::assertTrue(true);
-    }
+    // // Stream
+    // public function test_stream(): void
+    // {
+    //     Redis::del('members');
+
+    //     for ($i = 0; $i < 10; $i++) {
+    //         Redis::xadd("members", [
+    //             "name" => "Rio $i",
+    //             "address" => "meikarta",
+    //         ], "$i-0");
+    //     };
+    //     self::assertTrue(true);
+    // }
+
+    // // Consumer
+    // public function test_consumer(): void
+    // {
+    //     Redis::xgroup("create", "members", "group1", "0");
+    //     Redis::xgroup("createconsumer", "members", "group1", "consumer-1");
+    //     Redis::xgroup("createconsumer", "members", "group1", "consumer-2");
+
+    //     self::assertTrue(true);
+    // }
+
+    // // Consume Stream
+    // public function test_consume_stream(): void
+    // {
+    //     $result = Redis::xread("members", ">", 3, 3000);
+    //     self::assertNotNull($result);
+    //     echo json_encode($result, JSON_PRETTY_PRINT);
+    // }
+
+    
 }

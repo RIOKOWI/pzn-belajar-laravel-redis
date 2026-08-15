@@ -300,3 +300,8 @@ apa?
 
 
 
+# Cache
+## Laravel Cache
+- Laravel memiliki fitur bernama Cache untuk menyimpan data sementara
+- Cache biasanya digunakan untuk menyimpan data secara sementar, agar tidak perlu mengambil data dari sumber aslinya (misal database atau aplikasi lain)
+- Tujuan Cache adalah mempercepat proses, agar data yang sering diakses, tidak perlu diambil dari sumbernya yang lambat, karena Cache lebih cepat
