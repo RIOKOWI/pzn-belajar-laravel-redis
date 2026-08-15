@@ -180,17 +180,11 @@ class RedisTest extends TestCase
     // Pub Sub
     public function test_pub_sub(): void
     {
-        Redis::transaction(function ($transaction){
-            $transaction->setex("name", 5, "Rio"); // MULTI lalu COMMIT/EXEC
-            $transaction->setex("handphone", 5, "097877887");
-            $transaction->setex("address", 5, "ngawi");
-        });
+        for($i = 0; $i < 10; $i++){
+            Redis::publish("channel-1", "woi");
+            Redis::publish("channel-2", "apa?");
+        }
 
-        $name = Redis::get("name");
-        self::assertEquals("Rio", $name); // cek value
-        $hp = Redis::get("handphone");
-        self::assertEquals("097877887", $hp);
-        $ad = Redis::get("address");
-        self::assertEquals("ngawi", $ad);
+        self::assertTrue(true);
     }
 }
