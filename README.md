@@ -319,4 +319,27 @@ apa?
 - Melakukan Cache di Laravel cukup mudah, kita bisa menggunakan Cache Facade
 - `https://laravel.com/api/10.x/Illuminate/Support/Facades/Cache.html`
 - Banyak method yang bisa digunakan ketika menggunakan Cache Facade, intinya untuk menyimpan, mengambil dan menghapus data dari Cache
+* di File : [CacheTest](tests\Feature\CacheTest.php)
+```php
+    // Cache
+    public function test_cache(): void
+    {
+        Cache::put("name", "Rio", 2);
+        Cache::put("address", "Tionghoa", 2);
+
+        $response = Cache::get("name");
+        self::assertEquals("Rio", $response);
+        $response = Cache::get("address");
+        self::assertEquals("Tionghoa", $response);
+        // semua data di atas di simpan di redis
+        
+        sleep(6); // tunggu 6s agar values dalam key hilang
+        
+        $result = Cache::get("name");
+        self::assertNull($result);
+        $result = Cache::get("address");
+        self::assertNull($result);
+        // cek values lagi
+    }
+```
 
