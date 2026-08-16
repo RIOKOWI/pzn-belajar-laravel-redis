@@ -350,5 +350,15 @@ apa?
 - Laravel bisa menyimpan data Session di Redis
 - Kita bisa mengubah konfigurasi session di file `config/session.php`
 - Saat menjalankan unit test, file phpunitt.xml mengubah SESSION_DRIVER menjadi array, jadi kita harus ubah menjadi redis jika ingin menggunakan Redis di unit test
+* di File : [SessionController](app\Http\Controllers\SessionController.php)
+* di File : [Routing](routes\web.php)
+
+
+# Rate Limiting
+- Laravel memiliki fitur bernama Rate Limiting, fitur ini digunakan untuk membatasi jumlah eksekusi 
+- Secara default Rate Limiting menyimpan data di Cache, artinya jika Cache menggunakan Redis, maka secara otomatis informasi Rate Limiting juga akan disimpan di Redis
+- Untuk menggunakan Rate Limiting, kita bisa menggunakan Facade RateLimiter
+- `https://laravel.com/api/10.x/Illuminate/Support/Facades/RateLimiter.html`
+
 
 
