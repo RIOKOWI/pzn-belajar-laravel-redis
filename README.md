@@ -359,6 +359,13 @@ apa?
 - Secara default Rate Limiting menyimpan data di Cache, artinya jika Cache menggunakan Redis, maka secara otomatis informasi Rate Limiting juga akan disimpan di Redis
 - Untuk menggunakan Rate Limiting, kita bisa menggunakan Facade RateLimiter
 - `https://laravel.com/api/10.x/Illuminate/Support/Facades/RateLimiter.html`
-
-
-
+* di file : [RateLimitingTest](tests\Feature\RateLimitingTest.php)
+```php
+public function test_rate_limit(): void
+    {
+        $success = RateLimiter::attempt("send-message-1", 5, function(){ // kalo 5x percobaan akan di tolak default selama 60s
+            echo "send message 1";
+        }, 10); // kalo ini di tolak selama 10s
+        self::assertTrue($success);
+    }
+```
