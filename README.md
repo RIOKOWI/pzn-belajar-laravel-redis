@@ -348,7 +348,7 @@ apa?
 - Secara default, Session di Laravel akan disimpan di File
 - Masalah dengan disimpan di File adalah, ketika nanti kita menjalankan Larave di beberapa Server, maka data Session akan bermasalah, karena tidak sinkron antar aplikasi Laravel
 - Laravel bisa menyimpan data Session di Redis
-- Kita bisa mengubah konfigurasi session di file config/session.php
+- Kita bisa mengubah konfigurasi session di file `config/session.php`
 - Saat menjalankan unit test, file phpunitt.xml mengubah SESSION_DRIVER menjadi array, jadi kita harus ubah menjadi redis jika ingin menggunakan Redis di unit test
 
 
