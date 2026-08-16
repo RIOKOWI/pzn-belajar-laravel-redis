@@ -305,3 +305,10 @@ apa?
 - Laravel memiliki fitur bernama Cache untuk menyimpan data sementara
 - Cache biasanya digunakan untuk menyimpan data secara sementar, agar tidak perlu mengambil data dari sumber aslinya (misal database atau aplikasi lain)
 - Tujuan Cache adalah mempercepat proses, agar data yang sering diakses, tidak perlu diambil dari sumbernya yang lambat, karena Cache lebih cepat
+
+
+# Redis
+- Larave sebenarnya menyediakan tempat menyimpan Cache banyak, bisa Database, Redis, Memcached dan DynamoDB
+- Kita akan coba gunakan Redis sebagai tempat penyimpanan Cache
+- Kita bisa ubah konfigurasi Cache di file `config/cache.php`
+- Saat melakukan unit test, di phpunit.xml, konfigurasi CACHE_DRIVER diubah menjadi array, pastikan diubah menjadi redis jika ingin menggunakan redis
