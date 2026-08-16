@@ -312,3 +312,10 @@ apa?
 - Kita akan coba gunakan Redis sebagai tempat penyimpanan Cache
 - Kita bisa ubah konfigurasi Cache di file `config/cache.php`
 - Saat melakukan unit test, di phpunit.xml, konfigurasi CACHE_DRIVER diubah menjadi array, pastikan diubah menjadi redis jika ingin menggunakan redis
+
+
+## Cache Facade
+- Melakukan Cache di Laravel cukup mudah, kita bisa menggunakan Cache Facade
+- `https://laravel.com/api/10.x/Illuminate/Support/Facades/Cache.html`
+- Banyak method yang bisa digunakan ketika menggunakan Cache Facade, intinya untuk menyimpan, mengambil dan menghapus data dari Cache
+

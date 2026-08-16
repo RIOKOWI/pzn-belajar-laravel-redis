@@ -220,5 +220,9 @@ class RedisTest extends TestCase
     //     echo json_encode($result, JSON_PRETTY_PRINT);
     // }
 
-    
+    // Cache
+    public function test_cache(): void
+    {
+       
+    }
 }
