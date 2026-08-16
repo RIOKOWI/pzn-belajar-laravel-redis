@@ -300,6 +300,7 @@ apa?
 
 
 
+
 # Cache
 ## Laravel Cache
 - Laravel memiliki fitur bernama Cache untuk menyimpan data sementara
