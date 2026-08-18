@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get("/session/new", [SessionController::class, "set"]);
+Route::get("/session/get", [SessionController::class, "get"]);
 
 Route::get('/', function () {
     return view('welcome');
 });
+
